@@ -1,8 +1,11 @@
+import 'package:exemple_firebase/components/boto_auth.dart';
 import 'package:exemple_firebase/components/textfield_auth.dart';
 import 'package:flutter/material.dart';
 
 class PaginaRegistre extends StatelessWidget {
   const PaginaRegistre({super.key});
+
+  void ferRegistre() {}
 
   @override
   Widget build(BuildContext context) {
@@ -108,11 +111,20 @@ class PaginaRegistre extends StatelessWidget {
                 ),
               ),
 
-              
               const SizedBox(height: 10),
 
-
               //boto registrat
+              BotoAuth(
+                text: "Registre",
+                onTap: ferRegistre,
+              ),
+
+              BotoAuth(
+                text: "Logout",
+                onTap: () {
+                  
+                },
+              ),
             ],
           ),
         ),
