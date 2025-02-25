@@ -1,3 +1,5 @@
+import 'package:exemple_firebase/auth/portal_auth.dart';
+import 'package:exemple_firebase/pagines/pagina_login.dart';
 import 'package:exemple_firebase/pagines/pagina_registre.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,23 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       
-      home: PaginaRegistre(),
+      home: PortalAuth(),
     );
   }
 }
+
+/*
+1)tenir Node.js instalat
+  -En acabar, es pot cmprobar fent:
+      node -v 
+      npm -v
+2) anar a la web de firebase i clicar a "Go to console",
+  -Tenir en compte amb quin compte de google.
+3) desde la consola de firebase ceeum un projecte de firebase
+4)anem al menu compilacion y habilitem: 
+Authentication y firestore database 
+5) en un cm como la del VS Code, fem :
+  npm install -g firebase-tools (aixo instala firebase)
+6) flutter pub global activate flutterfire_cli
+
+*/

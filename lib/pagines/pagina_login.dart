@@ -1,24 +1,15 @@
 import 'package:exemple_firebase/auth/servei_auth.dart';
 import 'package:exemple_firebase/components/boto_auth.dart';
 import 'package:exemple_firebase/components/textfield_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class PaginaRegistre extends StatelessWidget {
-  final Function()? ferClic;
+class PaginaLogin extends StatelessWidget {
+  final Function
+  const PaginaLogin({super.key});
 
-  const PaginaRegistre({super.key,required this.ferClic});
-
-  void ferRegistre(
-      BuildContext context, email, String password, String confPassword) async {
-    if (password.isEmpty || email.isEmpty) {
-      return;
-    }
-
-    if (password != confPassword) {
-      return;
-    }
-    String? error =
-        await ServeiAuth().registraAmbEmailIPassword(email, password);
+  void ferLogin(BuildContext context, String email, String password) async {
+    String? error = await ServeiAuth().loginAmbEmailIPassword(email, password);
 
     if (error != null) {
       showDialog(
@@ -31,18 +22,15 @@ class PaginaRegistre extends StatelessWidget {
           content: Text("email i/o password incorrectes."),
         ),
       );
+    } else {
+      print("Login fet");
     }
-    try {} catch (e) {}
-
-    //<print(email);
   }
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController tecEmail = TextEditingController();
     final TextEditingController tecPassword = TextEditingController();
-    final TextEditingController tecConfPass = TextEditingController();
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 250, 183, 159),
       body: SafeArea(
@@ -61,7 +49,7 @@ class PaginaRegistre extends StatelessWidget {
 
               // Frase
               const Text(
-                "crea un compte nou",
+                "Benvingut de nou",
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 240, 218),
                   fontSize: 18,
@@ -85,7 +73,7 @@ class PaginaRegistre extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 4),
                       child: Text(
-                        "registrat",
+                        "Fes login",
                         style: TextStyle(
                             color: Color.fromARGB(255, 255, 240, 218)),
                       ),
@@ -114,13 +102,6 @@ class PaginaRegistre extends StatelessWidget {
                 hintText: "Tria un password",
               ),
 
-              // texfield confirmar password
-              TextfieldAuth(
-                controller: tecConfPass,
-                obscureText: true,
-                hintText: "Reescriu el password",
-              ),
-
               const SizedBox(
                 height: 10,
               ),
@@ -131,10 +112,12 @@ class PaginaRegistre extends StatelessWidget {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text("Ja ets membre?"),
-                    const SizedBox(width: 5),
+                    const Text("Encara no ets membre?"),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Text(
-                      "fes login",
+                      "Registrat",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 40, 71, 97),
@@ -148,9 +131,8 @@ class PaginaRegistre extends StatelessWidget {
 
               //Boto registrat
               BotoAuth(
-                text: "Registra't",
-                onTap: () => ferRegistre(
-                    context, tecEmail.text, tecPassword.text, tecConfPass.text),
+                text: "Login",
+                onTap: () => ferLogin(context, tecEmail.text, tecPassword.text),
               ),
             ],
           ),
